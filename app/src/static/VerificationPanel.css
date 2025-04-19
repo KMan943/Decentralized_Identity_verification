@@ -1,0 +1,279 @@
+/* src/pages/VerificationPanel.css */
+.verification-panel-container {
+    /* min-height: 100vh; */
+    /* background-color: #f7f9fc; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .verification-panel-card {
+    width: 100%;
+    min-width: 800px;
+    /* background-color: white; */
+    background: linear-gradient(135deg,rgb(186, 191, 255) 0%,rgb(226, 255, 218) 100%);
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    overflow: hidden;
+    padding: 32px;
+  }
+  
+  .verification-panel-header {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  
+  .verification-panel-header h2 {
+    color: #2d3748;
+    font-size: 28px;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  
+  .verification-panel-header p {
+    color: #718096;
+    font-size: 16px;
+  }
+  
+  .verifier-status {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f0fff4;
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 24px;
+  }
+  
+  .status-badge {
+    background-color: #48bb78;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  
+  .connected-address {
+    font-family: monospace;
+    color: #2d3748;
+    font-size: 14px;
+  }
+  
+  .manual-verification-section {
+    background-color: #f7fafc;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 24px;
+  }
+  
+  .manual-verification-section h3 {
+    color: #2d3748;
+    font-size: 18px;
+    margin-bottom: 16px;
+  }
+  
+  .manual-verification-section form {
+    display: flex;
+    gap: 12px;
+  }
+  
+  .input-wrapper {
+    position: relative;
+    flex: 1;
+  }
+  
+  .icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #718096;
+    font-size: 16px;
+  }
+  
+  .input-wrapper input {
+    width: 100%;
+    padding: 12px 12px 12px 40px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 15px;
+    transition: all 0.3s;
+    outline: none;
+  }
+  
+  .input-wrapper input:focus {
+    border-color: #4299e1;
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.15);
+  }
+  
+  .verify-button {
+    background-color: #48bb78;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 0 20px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    white-space: nowrap;
+  }
+  
+  .verify-button:hover:not(:disabled) {
+    background-color: #38a169;
+  }
+  
+  .verify-button:disabled {
+    background-color: #a0aec0;
+    cursor: not-allowed;
+  }
+  
+  .verify-button.small {
+    padding: 6px 12px;
+    font-size: 14px;
+  }
+  
+  .message {
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    margin-bottom: 24px;
+  }
+  
+  .message.success {
+    background-color: #c6f6d5;
+    color: #276749;
+  }
+  
+  .message.error {
+    background-color: #fed7d7;
+    color: #c53030;
+  }
+  
+  .pending-verifications-section {
+    margin-bottom: 24px;
+  }
+  
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  
+  .section-header h3 {
+    color: #2d3748;
+    font-size: 18px;
+  }
+  
+  .refresh-button {
+    background-color: #edf2f7;
+    color: #4a5568;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .refresh-button:hover:not(:disabled) {
+    background-color: #e2e8f0;
+  }
+  
+  .refresh-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  
+  .loading-indicator {
+    text-align: center;
+    color: #718096;
+    padding: 20px;
+  }
+  
+  .pending-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .pending-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    transition: background-color 0.3s;
+  }
+  
+  .pending-item:hover {
+    background-color: #f7fafc;
+  }
+  
+  .hash-display {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  .hash-label {
+    font-size: 12px;
+    color: #718096;
+  }
+  
+  .hash-value {
+    font-family: monospace;
+    font-size: 14px;
+    color: #2d3748;
+  }
+  
+  .empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: #718096;
+    background-color: #f7fafc;
+    border-radius: 8px;
+  }
+  
+  .back-link {
+    text-align: center;
+    margin-top: 24px;
+  }
+  
+  .back-link a {
+    color: #4299e1;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  .back-link a:hover {
+    text-decoration: underline;
+  }
+  
+  @media (max-width: 640px) {
+    .verification-panel-card {
+      padding: 24px 16px;
+    }
+    
+    .manual-verification-section form {
+      flex-direction: column;
+    }
+    
+    .verify-button {
+      width: 100%;
+      padding: 12px;
+    }
+    
+    .verifier-status {
+      flex-direction: column;
+      gap: 12px;
+      text-align: center;
+    }
+  }
+  

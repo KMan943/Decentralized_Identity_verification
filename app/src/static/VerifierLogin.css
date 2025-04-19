@@ -1,0 +1,91 @@
+/* src/pages/VerifierLogin.css */
+.verifier-login-container {
+    /* min-height: 100vh; */
+    /* background-color: #f7f9fc; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .verifier-login-card {
+    /* background-color: white; */
+    background: linear-gradient(135deg,rgb(186, 191, 255) 0%,rgb(226, 255, 218) 100%);
+    border-radius: 12px;
+    padding: 2.5rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    width: 100%;
+    max-width: 800px;
+    text-align: center;
+  }
+  
+  .verifier-login-card h2 {
+    color: #2d3748;
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .verifier-login-card p {
+    color: #718096;
+    margin-bottom: 2rem;
+  }
+  
+  .connect-wallet-section, .wallet-connected-section {
+    margin-bottom: 2rem;
+  }
+  
+  .connect-wallet-button, .verify-access-button {
+    background-color: #48bb78;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+    margin-top: 1rem;
+  }
+  
+  .connect-wallet-button:hover, .verify-access-button:hover {
+    background-color: #38a169;
+  }
+  
+  .verify-access-button:disabled {
+    background-color: #a0aec0;
+    cursor: not-allowed;
+  }
+  
+  .connected-address {
+    background-color: #e6fffa;
+    color: #234e52;
+    padding: 0.8rem;
+    border-radius: 8px;
+    font-family: monospace;
+    margin-bottom: 1.5rem;
+  }
+  
+  .error-message {
+    color: #e53e3e;
+    background-color: #fff5f5;
+    padding: 0.8rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+  }
+  
+  .back-link {
+    margin-top: 2rem;
+  }
+  
+  .back-link a {
+    color: #4299e1;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  .back-link a:hover {
+    text-decoration: underline;
+  }
+  

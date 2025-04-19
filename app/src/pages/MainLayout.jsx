@@ -16,7 +16,7 @@ const MainLayout = () => {
 
 const layout = {
     backgroundColor: 'black',
-    height: '100vh',
+    minHeight: '100vh',
     display: 'flex',
     justifyContent: 'center',
     flexdirection: 'column',
