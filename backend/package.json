@@ -1,0 +1,29 @@
+{
+  "name": "blockchain2",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u0000S\u0000m\u0000a\u0000r\u0000t\u0000-\u0000C\u0000o\u0000n\u0000t\u0000r\u0000a\u0000c\u0000t\u0000\r\u0000 \u0000",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MaahirArora/Smart-Contract.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MaahirArora/Smart-Contract/issues"
+  },
+  "homepage": "https://github.com/MaahirArora/Smart-Contract#readme",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-ethers": "^3.0.8",
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "ethers": "^6.13.5",
+    "hardhat": "^2.23.0"
+  },
+  "dependencies": {
+    "dotenv": "^16.5.0"
+  }
+}
