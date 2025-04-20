@@ -8,7 +8,7 @@ import Register from './pages/Register';
 import VerifierLogin from './pages/VerifierLogin';
 import VerificationPanel from './pages/VerificationPanel';
 import ProtectedRoute from './components/ProtectedRoute';
-// import Dashboard from './pages/Dashboard';
+import Dashboard from './pages/Dashboard';
 import contractABI from '../../backend/artifacts/contracts/Box.sol/IdentityVerification.json';
 
 // Create Web3 Context
@@ -127,10 +127,10 @@ const App = () => {
           path: "/verifier-login",
           element: <VerifierLogin />,
         },
-        // {
-        //   path: "/dashboard",
-        //   element: <ProtectedRoute element={<Dashboard />} />,
-        // },
+        {
+          path: "/dashboard",
+          element: <Dashboard />,
+        },
         {
           path: "/verification-panel",
           element: <ProtectedRoute element={<VerificationPanel />} verifierOnly={true} />,
