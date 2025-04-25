@@ -3,6 +3,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { Web3Context } from '../App';
 import { ethers } from 'ethers';
 import '../static/Dashboard.css';
+import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
   const { 
@@ -11,9 +12,12 @@ const Dashboard = () => {
     provider, 
     connectWallet 
   } = useContext(Web3Context);
+  const navigate = useNavigate();
 
   const [loading, setLoading] = useState(true);
   const [registeredIdentities, setRegisteredIdentities] = useState([]);
+  const [name, setName] = useState('');
+  const [documentHash, setDocumentHash] = useState('');
   const [identityHash, setIdentityHash] = useState('');
   const [statusMessage, setStatusMessage] = useState('');
   const [verifierAddress, setVerifierAddress] = useState('');
@@ -48,15 +52,39 @@ const Dashboard = () => {
     loadContractData();
   }, [contract, account]);
 
+  const generateIdentityHash = () => {
+    if (!name || !documentHash) {
+      setStatusMessage("Please enter both name and document hash");
+      return false;
+    }
+  
+    try {
+      // Using solidityPackedKeccak256 to match the Register component implementation
+      const generatedHash = ethers.solidityPackedKeccak256(
+        ['string', 'string'],
+        [name, documentHash]
+      );
+      
+      setIdentityHash(generatedHash);
+      setStatusMessage("Identity hash generated successfully");
+      return true;
+    } catch (error) {
+      console.error("Error generating identity hash:", error);
+      setStatusMessage(`Error: ${error.message}`);
+      return false;
+    }
+  };
+  
   const checkIdentityStatus = async () => {
     if (!account || !contract) {
       setStatusMessage("Please connect your wallet first");
       return;
     }
     
+    // Generate identity hash if not already done
     if (!identityHash) {
-      setStatusMessage("Please enter an identity hash to check");
-      return;
+      const hashGenerated = generateIdentityHash();
+      if (!hashGenerated) return;
     }
     
     try {
@@ -66,7 +94,7 @@ const Dashboard = () => {
       // Check if registered
       const isRegistered = await contract.registered(identityHash);
       
-      if (isRegistered !== 1) {
+      if (isRegistered.toString() !== "1") {
         setStatusMessage("This identity is not registered");
         setIdentityStatus({
           registered: false,
@@ -93,74 +121,110 @@ const Dashboard = () => {
 
   if (loading) {
     return (
-      <div className="dashboard-container loading">
-        <div className="loader"></div>
+      <div className="dash-dashboard-container loading">
+        <div className="dash-loader"></div>
         <p>Loading blockchain data...</p>
       </div>
     );
   }
 
   return (
-    <div className="dashboard-container">
-      <header className="dashboard-header">
-        <h1>Decentralized Identity Verification</h1>
-        <div className="account-info">
+    <div className="dash-dashboard-container">
+      <header className="dash-dashboard-header">
+        <h1>Dashboard</h1>
+        <div className="dash-account-info">
           {account ? (
             <div>
               <p>Connected Account: {account.substring(0, 6)}...{account.substring(account.length - 4)}</p>
-              <p className="account-type">
+              <p className="dash-account-type">
                 {account.toLowerCase() === verifierAddress.toLowerCase() 
                   ? 'Verifier Account' 
                   : 'User Account'}
               </p>
             </div>
           ) : (
-            <button className="connect-button" onClick={connectWallet}>Connect Wallet</button>
+            <button className="dash-connect-button" onClick={connectWallet}>Connect Wallet</button>
           )}
         </div>
       </header>
 
       {statusMessage && (
-        <div className={`status-message ${statusMessage.includes('Error') ? 'error' : 'success'}`}>
+        <div className={`dash-status-message ${statusMessage.includes('Error') ? 'error' : 'success'}`}>
           {statusMessage}
         </div>
       )}
 
-      <div className="dashboard-content">
-        <div className="dashboard-section">
+      <div className="dash-dashboard-content">
+        <div className="dash-dashboard-section">
           <h2>Check Identity Status</h2>
-          <div className="form-group">
-            <label htmlFor="identityHash">Identity Hash:</label>
+          <div className="dash-form-group">
+            <label htmlFor="name">Name:</label>
             <input 
               type="text" 
-              id="identityHash" 
-              value={identityHash} 
-              onChange={(e) => setIdentityHash(e.target.value)} 
-              placeholder="Enter identity hash to check"
+              id="name" 
+              value={name} 
+              onChange={(e) => setName(e.target.value)} 
+              placeholder="Enter your name"
             />
           </div>
-          <button 
-            className="action-button check-button" 
-            onClick={checkIdentityStatus}
-            disabled={!account || !identityHash}
-          >
-            Check Status
-          </button>
+          <div className="dash-form-group">
+            <label htmlFor="documentHash">Document Hash:</label>
+            <input 
+              type="text" 
+              id="documentHash" 
+              value={documentHash} 
+              onChange={(e) => setDocumentHash(e.target.value)} 
+              placeholder="Enter document hash"
+            />
+          </div>
+          {identityHash && (
+            <div className="dash-form-group">
+              <label>Generated Identity Hash:</label>
+              <div className="dash-hash-display">
+                {identityHash.substring(0, 10)}...{identityHash.substring(identityHash.length - 8)}
+                <button 
+                  className="dash-copy-button" 
+                  onClick={() => {
+                    navigator.clipboard.writeText(identityHash);
+                    setStatusMessage("Identity hash copied to clipboard");
+                  }}
+                >
+                  Copy
+                </button>
+              </div>
+            </div>
+          )}
+          <div className="dash-button-group">
+            <button 
+              className="dash-action-button dash-generate-button" 
+              onClick={generateIdentityHash}
+              disabled={!account || !name || !documentHash}
+            >
+              Generate Identity Hash
+            </button>
+            <button 
+              className="dash-action-button dash-check-button" 
+              onClick={checkIdentityStatus}
+              disabled={!account || (!identityHash && (!name || !documentHash))}
+            >
+              Check Status
+            </button>
+          </div>
           
           {identityStatus && (
-            <div className="status-result">
+            <div className="dash-status-result">
               <h3>Status Result:</h3>
-              <div className="status-details">
+              <div className="dash-status-details">
                 <p>
-                  <span className="status-label">Registration:</span> 
-                  <span className={`status-value ${identityStatus.registered ? 'status-positive' : 'status-negative'}`}>
+                  <span className="dash-status-label">Registration:</span> 
+                  <span className={`dash-status-value ${identityStatus.registered ? 'dash-status-positive' : 'dash-status-negative'}`}>
                     {identityStatus.registered ? 'Registered' : 'Not Registered'}
                   </span>
                 </p>
                 {identityStatus.registered && (
                   <p>
-                    <span className="status-label">Verification:</span> 
-                    <span className={`status-value ${identityStatus.verified ? 'status-positive' : 'status-pending'}`}>
+                    <span className="dash-status-label">Verification:</span> 
+                    <span className={`dash-status-value ${identityStatus.verified ? 'dash-status-positive' : 'dash-status-pending'}`}>
                       {identityStatus.verified ? 'Verified' : 'Pending Verification'}
                     </span>
                   </p>
@@ -170,28 +234,12 @@ const Dashboard = () => {
           )}
         </div>
 
-        <div className="dashboard-section">
-          <h2>Your Registered Identities</h2>
-          {registeredIdentities.length > 0 ? (
-            <div className="identities-list">
-              {registeredIdentities.map((identity, index) => (
-                <div key={index} className="identity-card">
-                  <div className="identity-hash">
-                    {identity.hash.substring(0, 10)}...{identity.hash.substring(identity.hash.length - 6)}
-                  </div>
-                  <div className={`identity-status ${identity.isVerified ? 'status-verified' : 'status-pending'}`}>
-                    {identity.isVerified ? 'Verified' : 'Pending Verification'}
-                  </div>
-                  <div className="identity-date">
-                    Registered: {new Date(identity.timestamp * 1000).toLocaleDateString()}
-                  </div>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <p className="no-data">No identities registered yet. Use the registration form to register your identity.</p>
-          )}
+        <div className="back-link">
+          <a href="/" onClick={(e) => { e.preventDefault(); navigate('/'); }}>
+            ← Back to Home
+          </a>
         </div>
+
       </div>
     </div>
   );

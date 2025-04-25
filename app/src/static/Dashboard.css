@@ -1,270 +1,284 @@
-/* Dashboard.css
+/* Dashboard.css */
+.dash-dashboard-container {
+  /* min-height: 100vh; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* padding: 2rem; */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  width: 100%;
+}
 
-.dashboard-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    font-family: 'Roboto', sans-serif;
-    color: #333;
-  }
-  
-  .dashboard-container.loading {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 70vh;
-  }
-  
-  .loader {
-    border: 5px solid #f3f3f3;
-    border-top: 5px solid #3498db;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    animation: spin 2s linear infinite;
-    margin-bottom: 20px;
-  }
-  
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-  
-  .dashboard-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #eaeaea;
-  }
-  
-  .dashboard-header h1 {
-    font-size: 28px;
-    color: #2c3e50;
-    margin: 0;
-  }
-  
-  .account-info {
-    text-align: right;
-  }
-  
-  .account-info p {
-    margin: 5px 0;
-  }
-  
-  .account-type {
-    font-weight: bold;
-    color: #3498db;
-  }
-  
-  .connect-button {
-    background-color: #3498db;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.3s;
-  }
-  
-  .connect-button:hover {
-    background-color: #2980b9;
-  }
-  
-  .status-message {
-    padding: 15px;
-    margin-bottom: 20px;
-    border-radius: 4px;
-    font-weight: 500;
-  }
-  
-  .status-message.success {
-    background-color: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
-  }
-  
-  .status-message.error {
-    background-color: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
-  }
-  
-  .dashboard-content {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 30px;
-  }
-  
-  @media (min-width: 768px) {
-    .dashboard-content {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-  
-  .dashboard-section {
-    background-color: #fff;
-    border-radius: 8px;
-    padding: 25px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-  }
-  
-  .dashboard-section h2 {
-    margin-top: 0;
-    margin-bottom: 20px;
-    color: #2c3e50;
-    font-size: 20px;
-    border-bottom: 2px solid #eaeaea;
-    padding-bottom: 10px;
-  }
-  
-  .form-group {
-    margin-bottom: 20px;
-  }
-  
-  .form-group label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 500;
-  }
-  
-  .form-group input {
-    width: 100%;
-    padding: 10px 12px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 16px;
-  }
-  
-  .action-button {
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: 500;
-    transition: background-color 0.3s;
-    margin-right: 10px;
-    margin-bottom: 10px;
-  }
-  
-  .action-button:disabled {
-    background-color: #cccccc;
-    cursor: not-allowed;
-  }
-  
-  .check-button {
-    background-color: #9b59b6;
-    color: white;
-  }
-  
-  .check-button:hover:not(:disabled) {
-    background-color: #8e44ad;
-  }
-  
-  .status-result {
-    margin-top: 20px;
-    padding: 15px;
-    background-color: #f8f9fa;
-    border-radius: 6px;
-    border-left: 4px solid #3498db;
-  }
-  
-  .status-result h3 {
-    margin-top: 0;
-    margin-bottom: 15px;
-    font-size: 18px;
-    color: #2c3e50;
-  }
-  
-  .status-details {
-    font-size: 16px;
-  }
-  
-  .status-label {
-    font-weight: 600;
-    margin-right: 10px;
-  }
-  
-  .status-value {
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-weight: 500;
-  }
-  
-  .status-positive {
-    background-color: #d4edda;
-    color: #155724;
-  }
-  
-  .status-negative {
-    background-color: #f8d7da;
-    color: #721c24;
-  }
-  
-  .status-pending {
-    background-color: #ffeeba;
-    color: #856404;
-  }
-  
-  .identities-list {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 15px;
-  }
-  
-  @media (min-width: 768px) {
-    .identities-list {
-      grid-template-columns: repeat(1, 1fr);
-    }
-  }
-  
-  .identity-card {
-    background-color: #f8f9fa;
-    border-radius: 6px;
-    padding: 15px;
-    border-left: 4px solid #3498db;
-  }
-  
-  .identity-hash {
-    font-family: monospace;
-    font-size: 14px;
-    margin-bottom: 8px;
-    word-break: break-all;
-  }
-  
-  .identity-status {
-    display: inline-block;
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 12px;
-    font-weight: bold;
-    margin-bottom: 8px;
-  }
-  
-  .status-pending {
-    background-color: #ffeeba;
-    color: #856404;
-  }
-  
-  .status-verified {
-    background-color: #d4edda;
-    color: #155724;
-  }
-  
-  .identity-date {
-    font-size: 12px;
-    color: #6c757d;
-  }
-  
-  .no-data {
-    color: #6c757d;
-    font-style: italic;
-    text-align: center;
-    padding: 20px;
-    background-color: #f8f9fa;
-    border-radius: 4px;
-  }
-   */
+.dash-dashboard-container.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Loader */
+.dash-loader {
+  border: 5px solid #e2e8f0;
+  border-top: 5px solid #4299e1;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: dash-spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+.dash-dashboard-content {
+  width: 100%;
+  max-width: 800px;
+  background: linear-gradient(135deg, rgb(132, 136, 192) 0%, rgb(131, 170, 121) 100%);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+  padding: 32px;
+  margin-bottom: 19px;
+}
+
+.dash-dashboard-header {
+  text-align: center;
+  margin-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.dash-dashboard-header h1 {
+  /* color: #2d3748; */
+  font-size: 28px;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.dash-account-info {
+  margin-top: 20px;
+  text-align: center;
+  background-color: #f0f8ff;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 500px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  width: 80%;
+}
+
+.dash-account-info p {
+  font-family: monospace;
+  color: #2d3748;
+  font-weight: 500;
+}
+
+.dash-account-type {
+  display: inline-block;
+  padding: 6px 12px;
+  background-color: #42e181;
+  color: white;
+  border-radius: 8px;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+.dash-connect-button, 
+.dash-dashboard-button {
+  background-color: #4eca89;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 100%;
+  margin-top: 15px;
+  text-align: center;
+  display: block;
+  text-decoration: none;
+}
+
+.dash-connect-button:hover,
+.dash-dashboard-button:hover {
+  background-color: #3db978;
+}
+
+.dash-status-message {
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+
+.dash-status-message.success {
+  background-color: #c6f6d5;
+  color: #276749;
+}
+
+.dash-status-message.error {
+  background-color: #fed7d7;
+  color: #c53030;
+}
+
+.dash-dashboard-section {
+  margin-bottom: 24px;
+}
+
+.dash-dashboard-section h2 {
+  color:rgb(18, 22, 28);
+  font-size: 22px;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.dash-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 20px;
+}
+
+.dash-form-group label {
+  font-size: 15px;
+  font-weight: 500;
+  color:rgb(34, 39, 47);
+}
+
+.dash-form-group input {
+  width: 94%;
+  padding: 14px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 15px;
+  /* transition: all 0.3s; */
+  /* outline: none; */
+}
+
+.dash-form-group input:focus {
+  border-color:rgb(2, 23, 40);
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.15);
+}
+
+
+.dash-hash-display {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 14px;
+  border-radius: 8px;
+  font-family: monospace;
+  font-size: 14px;
+  border: 1px solid #e2e8f0;
+  color: black;
+}
+
+.dash-copy-button {
+  background-color: #4299e1;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  /* color: black; */
+}
+
+.dash-copy-button:hover {
+  background-color: #3182ce;
+}
+
+.dash-button-group {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.dash-action-button {
+  flex: 1;
+  background-color: #4299e1;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.dash-action-button:hover:not(:disabled) {
+  background-color: #3182ce;
+}
+
+.dash-action-button:disabled {
+  background-color: #a0aec0;
+  cursor: not-allowed;
+}
+
+.dash-generate-button {
+  background-color: #4299e1;
+}
+
+.dash-check-button {
+  background-color: #38b2ac;
+}
+
+.dash-status-result {
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 8px;
+  padding: 20px;
+  border: 1px solid #e2e8f0;
+  margin-top: 24px;
+}
+
+.dash-status-result h3 {
+  color: #2d3748;
+  font-size: 18px;
+  margin-top: 0;
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.dash-status-details p {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.dash-status-details p:last-child {
+  border-bottom: none;
+}
+
+.dash-status-label {
+  font-weight: 600;
+  color: #4a5568;
+}
+
+.dash-status-value {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.dash-status-positive {
+  background-color: #c6f6d5;
+  color: #276749;
+}
+
+.dash-status-negative {
+  background-color: #fed7d7;
+  color: #c53030;
+}
+
+.dash-status-pending {
+  background-color: #feebc8;
+  color: #c05621;
+}
