@@ -23,4 +23,4 @@ const layout = {
     background: 'linear-gradient(135deg,rgb(18, 20, 54) 0%,rgb(12, 52, 2) 100%)',
 };
 
-export default MainLayout
+export default MainLayout;

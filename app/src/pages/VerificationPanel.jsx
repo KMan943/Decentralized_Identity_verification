@@ -2,10 +2,15 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Web3Context } from '../App'; 
+import { ethers } from 'ethers';
 import '../static/VerificationPanel.css';
 
 const VerificationPanel = () => {
-  const [identityHash, setIdentityHash] = useState('');
+  const [formData, setFormData] = useState({
+    name: '',
+    documentHash: ''
+  });
+  const [generatedHash, setGeneratedHash] = useState('');
   const [pendingVerifications, setPendingVerifications] = useState([]);
   const [loading, setLoading] = useState(false);
   const [verifyLoading, setVerifyLoading] = useState(false);
@@ -91,6 +96,46 @@ const VerificationPanel = () => {
     }
   };
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+    // Clear the generated hash when inputs change
+    setGeneratedHash('');
+  };
+
+  const generateIdentityHash = () => {
+    if (!formData.name || !formData.documentHash) {
+      setMessage({
+        text: "Please enter both name and document hash",
+        type: "error"
+      });
+      return;
+    }
+
+    try {
+      // Using solidityPackedKeccak256 to generate the hash
+      const hash = ethers.solidityPackedKeccak256(
+        ['string', 'string'],
+        [formData.name, formData.documentHash]
+      );
+      
+      setGeneratedHash(hash);
+      setMessage({
+        text: "Identity hash generated successfully",
+        type: "success"
+      });
+    } catch (error) {
+      console.error("Error generating identity hash:", error);
+      setMessage({
+        text: `Error: ${error.message}`,
+        type: "error"
+      });
+    }
+  };
+
   const handleVerify = async (hash) => {
     setVerifyLoading(true);
     setMessage({ text: '', type: '' });
@@ -111,9 +156,10 @@ const VerificationPanel = () => {
       // Refresh the list of pending verifications
       loadPendingVerifications();
       
-      // Clear the input field if it matches the verified hash
-      if (identityHash === hash) {
-        setIdentityHash('');
+      // Clear the form and generated hash
+      if (generatedHash === hash) {
+        setFormData({ name: '', documentHash: '' });
+        setGeneratedHash('');
       }
     } catch (error) {
       console.error("Verification failed:", error);
@@ -128,9 +174,12 @@ const VerificationPanel = () => {
 
   const handleManualVerify = async (e) => {
     e.preventDefault();
-    if (!identityHash) return;
+    if (!generatedHash) {
+      generateIdentityHash();
+      return;
+    }
     
-    await handleVerify(identityHash);
+    await handleVerify(generatedHash);
   };
 
   return (
@@ -148,27 +197,56 @@ const VerificationPanel = () => {
           </p>
         </div>
         
-        {/* Rest of your component remains the same */}
-        
         <div className="manual-verification-section">
-          <h3>Verify by Hash</h3>
+          <h3>Verify Identity</h3>
           <form onSubmit={handleManualVerify}>
             <div className="input-wrapper">
-              <i className="icon">🔍</i>
+              <i className="icon">👤</i>
               <input
                 type="text"
-                placeholder="Enter identity hash to verify"
-                value={identityHash}
-                onChange={(e) => setIdentityHash(e.target.value)}
+                name="name"
+                placeholder="Enter name"
+                value={formData.name}
+                onChange={handleInputChange}
               />
             </div>
-            <button 
-              type="submit" 
-              className="verify-button"
-              disabled={verifyLoading || !identityHash}
-            >
-              {verifyLoading ? 'Verifying...' : 'Verify Identity'}
-            </button>
+            <div className="input-wrapper">
+              <i className="icon">🔐</i>
+              <input
+                type="text"
+                name="documentHash"
+                placeholder="Enter document hash"
+                value={formData.documentHash}
+                onChange={handleInputChange}
+              />
+            </div>
+            
+            {generatedHash && (
+              <div className="generated-hash-display">
+                <span className="hash-label">Generated Identity Hash:</span>
+                <span className="hash-value">
+                  {`${generatedHash.substring(0, 10)}...${generatedHash.substring(generatedHash.length - 8)}`}
+                </span>
+              </div>
+            )}
+            
+            <div className="button-group">
+              <button 
+                type="button" 
+                className="generate-button"
+                onClick={generateIdentityHash}
+                disabled={!formData.name || !formData.documentHash}
+              >
+                Generate Hash
+              </button>
+              <button 
+                type="submit" 
+                className="verify-button"
+                disabled={verifyLoading || !generatedHash}
+              >
+                {verifyLoading ? 'Verifying...' : 'Verify Identity'}
+              </button>
+            </div>
           </form>
         </div>
         
