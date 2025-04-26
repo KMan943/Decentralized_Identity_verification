@@ -1,6 +1,6 @@
-## Decentralized Identity Verification
+# Decentralized Identity Verification
 
-# *Team: Third Level*
+## *Team: Third Level*
 - Mani      230001050
 - Rohan     230001069
 - Parth     23000
