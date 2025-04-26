@@ -1,12 +1,13 @@
 ## Decentralized Identity Verification
 
-# *Team: Third Level *
-Mani      230001050
-Rohan     230001069
-Parth     23000
-Maahir
-Kushagra
-Pranav
+# *Team: Third Level*
+- Mani      230001050
+- Rohan     230001069
+- Parth     23000
+- Maahir
+- Kushagra
+- Pranav
+
 
 A decentralized identity verification system leveraging blockchain technology to provide secure, user-controlled digital identity management. This project aims to address privacy, security, and compliance challenges by eliminating reliance on centralized authorities and giving users full control over their personal data.
 
