@@ -81,6 +81,24 @@ Decentralized_Identity_verification/
 4. **Configure Environment**
    - Set up environment variables or configuration files as needed for blockchain endpoints and contract addresses.
 
+5. **Running the Dapp**
+   - Open 3 terminals and do the following in them
+   - Terminal 1
+   ```bash
+   cd backend
+   npx hardhat run scripts/deploy.js --network localhost
+   ```
+   - Terminal 2
+   ```bash
+   cd backend
+   npx hardhat node
+   ```
+   - Terminal 3
+   ```bash
+   cd app
+   npm run dev
+   ```
+   - The website will then be run on the localhost port 5173 by default
 ---
 
 ## **Usage**
