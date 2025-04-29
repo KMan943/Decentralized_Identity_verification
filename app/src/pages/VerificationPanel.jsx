@@ -67,8 +67,6 @@ const VerificationPanel = () => {
     
     setLoading(true);
     try {
-      // This is a simplified approach - in a real application, you would
-      // need to query past events or have an indexing service
       const filter = contract.filters.IdentityRegistered();
       const events = await contract.queryFilter(filter);
       

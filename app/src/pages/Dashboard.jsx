@@ -37,10 +37,6 @@ const Dashboard = () => {
         const contractVerifier = await contract.verifier();
         setVerifierAddress(contractVerifier);
         
-        // In a real implementation, we would use events to get registered identities
-        // For this example, we'll use a mock implementation
-        // This would be replaced with actual blockchain event queries
-        
         setLoading(false);
       } catch (error) {
         console.error("Error loading contract data:", error);
@@ -59,7 +55,7 @@ const Dashboard = () => {
     }
   
     try {
-      // Using solidityPackedKeccak256 to match the Register component implementation
+      // Using solidityPackedKeccak256 to generate hash
       const generatedHash = ethers.solidityPackedKeccak256(
         ['string', 'string'],
         [name, documentHash]

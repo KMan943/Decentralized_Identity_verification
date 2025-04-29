@@ -17,7 +17,6 @@ const ProtectedRoute = ({ element, verifierOnly = false }) => {
       }
       
       try {
-        // Use verifier (singular) instead of verifiers (plural) to match your contract
         const contractVerifier = await contract.verifier();
         const isAccountVerifier = contractVerifier.toLowerCase() === account.toLowerCase();
         setIsVerifier(isAccountVerifier);

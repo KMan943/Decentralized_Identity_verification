@@ -43,7 +43,7 @@ const App = () => {
             );
             setContract(contractInstance);
             
-            // Check if account is the verifier - MODIFY THIS PART
+            // Check if account is the verifier
             try {
               const contractVerifier = await contractInstance.verifier();
               console.log("Contract verifier:", contractVerifier);
@@ -109,7 +109,7 @@ const App = () => {
     }
   };
 
-  // Define routes with Web3 context
+  // Defining routes with Web3 context
   const router = createBrowserRouter([
     {
       path: "/", 
