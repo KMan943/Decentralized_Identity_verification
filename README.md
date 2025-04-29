@@ -88,6 +88,7 @@ Decentralized_Identity_verification/
    cd backend
    npx hardhat run scripts/deploy.js --network localhost
    ```
+   - Note down the address it deployed to in a .env file with variable name : "VITE_CONTRACT_ADDRESS"
    - Terminal 2
    ```bash
    cd backend
